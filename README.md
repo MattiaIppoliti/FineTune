@@ -69,7 +69,7 @@ npm run dev
   
 <p align="center">
   <img
-    src="[https://github.com/user-attachments/assets/40cd48f5-d1b5-4045-8d06-2768a9121984](https://github.com/user-attachments/assets/2ea82f31-1e7f-4fc4-9109-f25a8bd98f06)"
+    src="https://github.com/user-attachments/assets/2ea82f31-1e7f-4fc4-9109-f25a8bd98f06"
     height="256"
     alt="control-volume-icon-2"
   />
