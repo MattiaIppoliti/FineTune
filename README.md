@@ -10,7 +10,7 @@
   Built by <a href="https://github.com/MattiaIppoliti" target="_blank" rel="noopener noreferrer">MattiaIppoliti</a>
 </h3>
 <p align="center">
-  FineTune is a Raycast extension focused for **per-app audio control** with a fast workflow and an explicit FineTune engine toggle.lets you control your tools with a few keystrokes.
+  FineTune is a Raycast extension focused for per-app audio control with a few keystrokes.
   <br />
   This repository contains the FineTune Raycast extension, documentation, and examples.
 </p>
