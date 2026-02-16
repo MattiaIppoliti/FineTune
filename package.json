@@ -24,6 +24,20 @@
       "description": "Enable or disable FineTune processing. Disabled mode uses only system-default audio routing.",
       "icon": "control-volume-icon.png",
       "mode": "no-view"
+    },
+    {
+      "name": "set-default-output-device",
+      "title": "Set Default Output Device (FineTune)",
+      "description": "Set system default output device quickly.",
+      "icon": "control-volume-icon.png",
+      "mode": "view",
+      "keywords": [
+        "finetune",
+        "default",
+        "output",
+        "device",
+        "switch"
+      ]
     }
   ],
   "dependencies": {

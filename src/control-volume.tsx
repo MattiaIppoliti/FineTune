@@ -257,6 +257,11 @@ export default function Command() {
   const systemOutputUid = systemOutputDevice?.uid;
   const systemOutputName = systemOutputDevice?.name || "System Output";
   const visibleApps = runningApps.filter((app) => {
+    const appName = app.name.toLowerCase();
+    if (appName.includes("safari graphics and media")) {
+      return false;
+    }
+
     const status = appStatuses[app.bundleId];
     const isPlaying = status?.state === "playing";
     const isPaused = status?.state === "paused" || status?.state === "stopped";
