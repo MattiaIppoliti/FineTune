@@ -1,10 +1,10 @@
 # FineTune for Raycast
 
-<div style="text-align: center;">
+<div style="display: flex; justify-content: center;">
   <img 
-    src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a" 
+    src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a"
     alt="control-volume-icon"
-    style="width: 200px; height: 200px; object-fit: cover;" 
+    style="width: 200px; height: 200px; object-fit: cover;"
   />
 </div>
 
