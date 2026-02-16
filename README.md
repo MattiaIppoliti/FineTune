@@ -1,6 +1,13 @@
 # FineTune for Raycast
 
-<img width="512" height="512" alt="control-volume-icon" src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a" />
+<div style="text-align: center;">
+  <img 
+    src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a" 
+    alt="control-volume-icon"
+    style="width: 200px; height: 200px; object-fit: cover;" 
+  />
+</div>
+
 A Raycast extension for controlling audio on macOS. Provides system volume control, device switching, and native per-app volume control for supported applications.
 
 ## Features
