@@ -6,7 +6,9 @@
   />
   <h1 align="center">FineTune for Raycast</h1>
 </p>
-
+<h3 align="center">
+  Built by <a href="https://github.com/MattiaIppoliti" target="_blank" rel="noopener noreferrer">MattiaIppoliti</a>
+</h3>
 <p align="center">
   FineTune lets you control your tools with a few keystrokes.
   <br />
