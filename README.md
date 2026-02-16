@@ -1,12 +1,21 @@
 # FineTune for Raycast
 
-<div style="display: flex; justify-content: center;">
-  <img 
+<p align="center">
+  <img
     src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a"
+    height="128"
     alt="control-volume-icon"
-    style="width: 200px; height: 200px; object-fit: cover;"
   />
-</div>
+  <h1 align="center">FineTune for Raycast</h1>
+</p>
+
+<p align="center">
+  FineTune lets you control your tools with a few keystrokes.
+  <br />
+  This repository contains the FineTune Raycast extension, documentation, and examples.
+</p>
+
+![Header](images/header.webp)
 
 A focused Raycast extension for **per-app audio control** with a fast workflow and an explicit FineTune engine toggle.
 
