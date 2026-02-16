@@ -66,6 +66,14 @@ npm run dev
 
 - If FineTune is disabled, `Control App Volume` still opens and tracks active apps, but FineTune-specific routing/boost paths are disabled.
 - If FineTune is not installed, toggling will fail with a clear error.
+  
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/40cd48f5-d1b5-4045-8d06-2768a9121984"
+    height="128"
+    alt="control-volume-icon"
+  />
+</p>
 
 ## License
 
