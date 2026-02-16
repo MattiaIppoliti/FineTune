@@ -8,71 +8,59 @@
   />
 </div>
 
-A Raycast extension for controlling audio on macOS. Provides system volume control, device switching, and native per-app volume control for supported applications.
+A focused Raycast extension for **per-app audio control** with a fast workflow and an explicit FineTune engine toggle.
 
-## Features
+## What This Version Includes
 
-### System Audio Control
+This extension now exposes only two commands:
 
-- **Set System Volume** - Quickly set volume with presets or fine control (5% steps)
-- **Toggle Mute** - Instantly mute/unmute system audio
-- **Switch Output Device** - Quick device switching between speakers, headphones, AirPods, etc.
+1. **Control App Volume**
+2. **Toggle FineTune**
 
-### App Audio Control
-
-- **Per-App Volume** - Control volume for individual running applications (Music, Spotify, TV, etc.)
-- **Visual Feedback** - See volume levels with visual progression bars
-- **Device Selection** - Switch output devices for supported apps
-
-### Menu Bar
-
-- Always visible volume indicator in your menu bar
-- Quick access to volume presets
-- Switch output devices without leaving your current app
-- Background refresh to keep volume status updated
+All other previous commands were removed.
 
 ## Commands
 
-| Command                  | Description                                                    |
-| ------------------------ | -------------------------------------------------------------- |
-| **Control App Volume**   | Main interface showing volume, devices, and running audio apps |
-| **Switch Output Device** | Quick device switching interface                               |
-| **Set System Volume**    | Volume presets and fine control                                |
-| **Toggle Mute**          | One-key mute toggle (no-view mode)                             |
-| **Audio Menu Bar**       | Menu bar command for quick access                              |
+### Control App Volume
+
+Shows apps with active or recent audio and lets you:
+
+- Set per-app volume (including boost presets)
+- Route an app to a specific output device (when FineTune is enabled)
+- Remove per-app routing
+
+The command is optimized to load quickly and update app status incrementally.
+
+### Toggle FineTune
+
+Toggles FineTune processing globally:
+
+- **ON**:
+  - Restores your previous FineTune per-app settings
+  - Re-enables per-app routing/boost behavior
+- **OFF**:
+  - Stops applying FineTune per-app processing
+  - Clears active per-app routing/volume so apps use the **system default audio device/route**
+  - Keeps a backup of your previous settings so they can be restored when toggled ON again
 
 ## Requirements
 
-- macOS 14.0 (Sonoma) or later
-- Raycast 1.26.0 or higher
-- Node.js 22.14 or higher
-
-### Optional (Recommended)
-
-- **[SwitchAudioSource](https://github.com/deweller/switchaudio-osx)** - For seamless audio device switching
-  ```bash
-  brew install switchaudio-osx
-  ```
+- macOS 14.0+ (Sonoma or later)
+- Raycast 1.26.0+
+- Node.js 22.14+
+- FineTune app installed at `/Applications/FineTune.app` (required for toggle + per-app FineTune processing)
 
 ## Installation
 
-1. Clone or download this repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start development:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm install
+npm run dev
+```
 
-## How It Works
+## Notes
 
-This extension uses macOS AppleScript to control system audio.
-
-- **System Volume/Mute**: Uses standard AppleScript commands.
-- **Per-App Control**: Uses AppleScript to control applications that support scripting (e.g., Music, Spotify).
-- **Device Switching**: Uses `switchaudio-osx` if available, otherwise falls back to system profiler (view only) or manual switching.
+- If FineTune is disabled, `Control App Volume` still opens and tracks active apps, but FineTune-specific routing/boost paths are disabled.
+- If FineTune is not installed, toggling will fail with a clear error.
 
 ## License
 

@@ -1,8 +1,12 @@
 import { Action, ActionPanel, Color, Icon, List, showToast, Toast } from "@raycast/api";
 import {
   AudioApp,
+  AppStatus,
   AudioDevice,
+  getAppStatus,
   getAppOutputDevice,
+  getOutputDeviceIconSource,
+  isCommunicationApp,
   removeAppOutputDevice,
   setAppOutputDevice,
   setAppVolume,
@@ -13,23 +17,43 @@ import { useState, useEffect } from "react";
 interface AppVolumeControlProps {
   app: AudioApp;
   devices: AudioDevice[];
+  initialStatus?: AppStatus;
+  initialRoutedDeviceUid?: string | null;
   onVolumeChange?: (volume: number) => void;
 }
 
-export function AppVolumeControl({ app, devices, onVolumeChange }: AppVolumeControlProps) {
-  const [currentVolume, setCurrentVolume] = useState<number | null>(null);
+export function AppVolumeControl({
+  app,
+  devices,
+  initialStatus,
+  initialRoutedDeviceUid,
+  onVolumeChange,
+}: AppVolumeControlProps) {
+  const [currentVolume, setCurrentVolume] = useState<number | null>(initialStatus?.volume ?? null);
   const [systemDeviceUid, setSystemDeviceUid] = useState<string | undefined>(devices.find((d) => d.isDefault)?.uid);
-  const [routedDeviceUid, setRoutedDeviceUid] = useState<string | undefined>();
+  const [routedDeviceUid, setRoutedDeviceUid] = useState<string | undefined>(initialRoutedDeviceUid ?? undefined);
+  const communicationApp = isCommunicationApp(app.name, app.bundleId);
+  const presets = communicationApp ? VOLUME_PRESETS.filter((preset) => preset.value <= 100) : VOLUME_PRESETS;
 
   useEffect(() => {
     setSystemDeviceUid(devices.find((d) => d.isDefault)?.uid);
   }, [devices]);
 
   useEffect(() => {
-    getAppOutputDevice(app.bundleId).then((uid) => {
+    if (initialRoutedDeviceUid !== undefined) return;
+    void getAppOutputDevice(app.bundleId).then((uid) => {
       setRoutedDeviceUid(uid ?? undefined);
     });
-  }, [app.bundleId]);
+  }, [app.bundleId, initialRoutedDeviceUid]);
+
+  useEffect(() => {
+    if (initialStatus?.volume !== null && initialStatus?.volume !== undefined) return;
+    void getAppStatus(app.name, app.bundleId).then((status) => {
+      if (status.volume !== null) {
+        setCurrentVolume(status.volume);
+      }
+    });
+  }, [app.bundleId, app.name, initialStatus?.volume]);
 
   const handleSetVolume = async (volume: number) => {
     const result = await setAppVolume(app.name, volume, app.bundleId);
@@ -93,13 +117,13 @@ export function AppVolumeControl({ app, devices, onVolumeChange }: AppVolumeCont
   return (
     <List navigationTitle={`Control ${app.name}`}>
       <List.Section title="Volume Control">
-        {VOLUME_PRESETS.map((preset) => (
+        {presets.map((preset) => (
           <List.Item
             key={preset.value}
             title={preset.name}
             subtitle={`${preset.value}%`}
-            icon={{ source: preset.icon, tintColor: currentVolume === preset.value ? Color.Green : Color.PrimaryText }}
-            accessories={currentVolume === preset.value ? [{ tag: { value: "Active", color: Color.Green } }] : []}
+            icon={{ source: preset.icon, tintColor: currentVolume === preset.value ? Color.Orange : Color.PrimaryText }}
+            accessories={currentVolume === preset.value ? [{ tag: { value: "Current", color: Color.Orange } }] : []}
             actions={
               <ActionPanel>
                 <Action
@@ -122,9 +146,12 @@ export function AppVolumeControl({ app, devices, onVolumeChange }: AppVolumeCont
             <List.Item
               key={device.uid}
               title={device.name}
-              icon={{ source: Icon.Headphones, tintColor: isRouted ? Color.Green : Color.PrimaryText }}
+              icon={{
+                source: getOutputDeviceIconSource(device),
+                tintColor: isRouted ? Color.Yellow : isSystemCurrent ? Color.Blue : Color.PrimaryText,
+              }}
               accessories={[
-                ...(isRouted ? [{ tag: { value: "Routed", color: Color.Green } }] : []),
+                ...(isRouted ? [{ tag: { value: "Routed", color: Color.Yellow } }] : []),
                 ...(isSystemCurrent ? [{ tag: { value: "System", color: Color.Blue } }] : []),
               ]}
               actions={
