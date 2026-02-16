@@ -1,5 +1,3 @@
-# FineTune for Raycast
-
 <p align="center">
   <img
     src="https://github.com/user-attachments/assets/57ae6639-b5c1-45f0-99e7-c22f8cfc938a"
@@ -14,8 +12,6 @@
   <br />
   This repository contains the FineTune Raycast extension, documentation, and examples.
 </p>
-
-![Header](images/header.webp)
 
 A focused Raycast extension for **per-app audio control** with a fast workflow and an explicit FineTune engine toggle.
 
